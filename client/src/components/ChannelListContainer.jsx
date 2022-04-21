@@ -9,7 +9,7 @@ const SideBar = () => (
     <div className="channelListSidebar">
         <div className="channelListSidebar_icon1">
             <div className="icon1_inner">
-                <img src={SlouchIcon} alt="Hostpital" width="30"/>
+                <img src={SlouchIcon} alt="SlouchIcon" width="30"/>
             </div>
         </div>
     </div>
