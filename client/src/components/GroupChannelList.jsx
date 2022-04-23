@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AddChannel } from '../assets'
 
-// this class will be used to display
+// this class will be used to display groups and DMs
 // type prop for group chats or DMs
 const GroupChannelList = ({ children, error = false, loading, type}) => {
       if(error) {
@@ -37,4 +37,4 @@ const GroupChannelList = ({ children, error = false, loading, type}) => {
       );
 }
 
-export default TeamChannelList
+export default GroupChannelList

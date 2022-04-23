@@ -23,7 +23,7 @@ const SideBar = () => (
 
 const CompanyHeader = () => (
     <div className="channel-list__header">
-        <p className="channel-list__header__text">Slouch Messenger</p>
+        <p className="channel-list__header__text">Slouch Music Chat</p>
     </div>
 );
 
@@ -35,13 +35,38 @@ const ChannelListContainer = () => {
             <CompanyHeader/>
             <ChannelSearch />
             <ChannelList 
-                filters={}
-                channelRenderFilterFunc={() => ()}
+                filters={{}}
+                channelRenderFilterFunc={() => {}}
                 List={(listProps) => (
                     <GroupChannelList
                         {...listProps}
+                        type="group"
                     />
                 )}
+                Preview={(previewProps) => (
+                    <GroupChannelPreview
+                        {...previewProps}
+                        type="group"
+                    />
+                )
+                }
+            />
+            <ChannelList 
+                filters={{}}
+                channelRenderFilterFunc={() => {}}
+                List={(listProps) => (
+                    <GroupChannelList
+                        {...listProps}
+                        type="messaging"
+                    />
+                )}
+                Preview={(previewProps) => (
+                    <GroupChannelPreview
+                        {...previewProps}
+                        type="messaging"
+                    />
+                )
+                }
             />
         </div>
         </>
