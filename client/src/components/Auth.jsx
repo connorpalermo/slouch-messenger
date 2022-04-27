@@ -20,7 +20,11 @@ const Auth = () => {
 
 const handleChange = (event) => {
     setForm({ ...form, [event.target.name] : event.target.value})
-    console.log(form);
+}
+
+const handleSubmit = (event) => {
+    event.preventDefault(); // avoid reloading the page
+    console.log(form)
 }
 
 const switchMode = () => {
@@ -101,6 +105,9 @@ const switchMode = () => {
                             />
                         </div>
                     )}
+                <div className="auth__form-container_fields-content_button">
+                    <button onClick={handleSubmit}>{isSignUp ? "Sign Up" : "Sign In"}</button>
+                </div>
                 </form>
                 <div className="auth__form-container_fields-account">
                         <p>
