@@ -27,6 +27,8 @@ const CompanyHeader = () => (
     </div>
 );
 
+// ChannelListContainer class will bring ChannelSearch, ChannelList, GroupChannelList etc together and display them in the ChannelList Wrapper
+// Sidebar with icons defined in a const above.
 const ChannelListContainer = () => {
   return (
         <>

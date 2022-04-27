@@ -21,6 +21,7 @@ const customStyles: CustomStyles = {
 // this will declare the instance of our Streamchat, which will allow this chat to work.
 const client = StreamChat.getInstance(slouchApiKey);
 
+// the basis of our entire application. Gets rendered in the ReactDOM in index.js
 const App = () => {
   return (
     <div className='app__wrapper'> 

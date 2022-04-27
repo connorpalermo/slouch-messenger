@@ -1,6 +1,8 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
+// Group Channel preview will allow you to preview DMs and channels in the sidebar wrapper. Defined as const,
+// logic to differentiate between the two below.
 const GroupChannelPreview = ({channel, type}) => {
     const {channel: activeChannel, client} = useChatContext();
 

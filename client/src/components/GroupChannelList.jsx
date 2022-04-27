@@ -3,7 +3,8 @@ import React from 'react';
 import { AddChannel } from '../assets'
 
 // this class will be used to display groups and DMs
-// type prop for group chats or DMs
+// type prop is used for group chats or DMs
+
 const GroupChannelList = ({ children, error = false, loading, type}) => {
       if(error) {
           return type === 'group' ? (

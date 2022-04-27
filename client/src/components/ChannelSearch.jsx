@@ -3,6 +3,8 @@ import { useChatContext } from 'stream-chat-react';
 
 import { SearchIcon } from '../assets'
  
+// ChannelSearch will be used to implement the search functionality of the music chat.
+
 const ChannelSearch = () => {
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
