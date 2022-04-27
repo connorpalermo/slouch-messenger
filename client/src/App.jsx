@@ -3,12 +3,10 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
-import { ChannelListContainer, ChannelContainer } from './components';
+import { ChannelListContainer, ChannelContainer, Auth } from './components';
 
 import './App.css';
 import '@stream-io/stream-chat-css/dist/css/index.css';
-
-const slouchApiKey = 'wjdterkuvn6h';
 
 const customStyles: CustomStyles = {
   '--primary-color': 'purple',
@@ -18,11 +16,19 @@ const customStyles: CustomStyles = {
   '--grey-gainsboro': 'purple',
 }
 
+const slouchApiKey = 'wjdterkuvn6h'; 
+
 // this will declare the instance of our Streamchat, which will allow this chat to work.
 const client = StreamChat.getInstance(slouchApiKey);
 
+const authToken = false;
+
 // the basis of our entire application. Gets rendered in the ReactDOM in index.js
 const App = () => {
+
+  // if we aren't logged in, then Auth component will be returned.
+  if(!authToken) return <Auth />
+
   return (
     <div className='app__wrapper'> 
         <Chat client={client} customStyles={customStyles}>
