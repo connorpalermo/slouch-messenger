@@ -1,9 +1,11 @@
 // auth controllers
 const { connect } = require('getStream');
 const bcrypt = require('bcrypt');
-const StreamChat = require('stream-chat');
+const StreamChat = require('stream-chat').StreamChat; // also need to create instance
 const crypto = require('crypto');
 const { restart } = require('nodemon');
+
+require('dotenv').config(); // need to explicitly require these variables
 
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;

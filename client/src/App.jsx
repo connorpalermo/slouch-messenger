@@ -16,12 +16,26 @@ const customStyles: CustomStyles = {
   '--grey-gainsboro': 'purple',
 }
 
+const cookies = new Cookies();
+
 const slouchApiKey = 'wjdterkuvn6h'; 
+const authToken = cookies.get("token");
 
 // this will declare the instance of our Streamchat, which will allow this chat to work.
 const client = StreamChat.getInstance(slouchApiKey);
 
-const authToken = false;
+// note that some things are renamed to match the keys on the client side.
+if(authToken){
+  client.connectUser({
+    token: cookies.get('token'),
+    name: cookies.get('username'),
+    fullName: cookies.get('fullName'),
+    id: cookies.get('userId'),
+    phoneNumber: cookies.get('phoneNumber'),
+    image: cookies.get('avatarURL'),
+    hashedPassword: cookies.get('hashedPassword'),
+  }, authToken);
+}
 
 // the basis of our entire application. Gets rendered in the ReactDOM in index.js
 const App = () => {

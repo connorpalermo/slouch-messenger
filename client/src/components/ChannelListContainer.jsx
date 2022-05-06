@@ -6,7 +6,9 @@ import { ChannelSearch, GroupChannelList, GroupChannelPreview } from './';
 import SlouchIcon from '../assets/slouch.png';
 import LogoutIcon from '../assets/logout.png'
 
-const SideBar = () => (
+const cookies = new Cookies();
+
+const SideBar = ({ logout }) => (
     <div className="channel-list__sidebar">
         <div className="channel-list__sidebar__icon1">
             <div className="icon1__inner">
@@ -14,7 +16,7 @@ const SideBar = () => (
             </div>
         </div>
         <div className="channel-list__sidebar__icon2">
-            <div className="icon2__inner">
+            <div className="icon2__inner" onClick={logout}>
                 <img src={LogoutIcon} alt="LogoutIcon" width="30"/>
             </div>
         </div>
@@ -30,9 +32,21 @@ const CompanyHeader = () => (
 // ChannelListContainer class will bring ChannelSearch, ChannelList, GroupChannelList etc together and display them in the ChannelList Wrapper
 // Sidebar with icons defined in a const above.
 const ChannelListContainer = () => {
+
+    const logout = () => {
+        cookies.remove('token');
+        cookies.remove('username');
+        cookies.remove('fullName');
+        cookies.remove('userId');
+        cookies.remove('phoneNumber');
+        cookies.remove('avatarURL');
+        cookies.remove('hashedPassword');
+
+        window.location.reload(); //bring us back to auth page.
+    }
   return (
         <>
-        <SideBar />
+        <SideBar logout={logout}/>
         <div className="channel-list__list__wrapper">
             <CompanyHeader/>
             <ChannelSearch />

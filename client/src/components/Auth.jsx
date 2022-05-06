@@ -5,6 +5,8 @@ import axios from 'axios';
 import signinImage from '../assets/signup.jpg'
 import { InitialState } from 'stream-chat-react/dist/components/Channel/channelState';
 
+const cookies = new Cookies();
+
 const initialState = {
     fullName: '',
     userName: '',
@@ -22,9 +24,30 @@ const handleChange = (event) => {
     setForm({ ...form, [event.target.name] : event.target.value})
 }
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
     event.preventDefault(); // avoid reloading the page
     console.log(form)
+
+    const { fullName, username, password, phoneNumber, avatarURL} = form; // gets values from keys in form
+
+    const URL = 'http://localhost:5001/auth'; // backend URL
+
+    const { data: { token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login' }`,{
+        username, password, fullName, phoneNumber, avatarURL
+    }); // pass data to backend endpoint
+
+    cookies.set('token', token);
+    cookies.set('username', username);
+    cookies.set('fullName', fullName);
+    cookies.set('userId', userId);
+
+    if(isSignUp) { 
+        cookies.set('phoneNumber', phoneNumber);
+        cookies.set('avatarURL', avatarURL);
+        cookies.set('hashedPassword',hashedPassword);
+    }
+
+    window.location.reload(); // reload our application with a filled auth token
 }
 
 const switchMode = () => {
