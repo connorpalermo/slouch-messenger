@@ -5,7 +5,7 @@ import { AddChannel } from '../assets'
 // this class will be used to display groups and DMs
 // type prop is used for group chats or DMs
 
-const GroupChannelList = ({ children, error = false, loading, type}) => {
+const GroupChannelList = ({ children, error = false, loading, type, isCreating, setIsCreating, setCreateType, setIsEditing }) => {
       if(error) {
           return type === 'group' ? (
             <div className="team-channel-list">
@@ -31,7 +31,13 @@ const GroupChannelList = ({ children, error = false, loading, type}) => {
                 <p className="team-channel-list__header__title">
                 {type === 'group' ? 'Channels' : 'Direct Messages'} 
                 </p>
-                {/* Button to add group */}
+                <AddChannel 
+                        isCreating={isCreating}
+                        setIsCreating={setIsCreating}
+                        setCreateType={setCreateType}
+                        setIsEditing={setIsEditing}   
+                        type={type === 'group' ? 'team' : 'messaging'}               
+                />
             </div>
             {children}
         </div>

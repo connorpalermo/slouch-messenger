@@ -31,7 +31,7 @@ const CompanyHeader = () => (
 
 // ChannelListContainer class will bring ChannelSearch, ChannelList, GroupChannelList etc together and display them in the ChannelList Wrapper
 // Sidebar with icons defined in a const above.
-const ChannelListContainer = () => {
+const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
 
     const logout = () => {
         cookies.remove('token');
@@ -57,6 +57,10 @@ const ChannelListContainer = () => {
                     <GroupChannelList
                         {...listProps}
                         type="group"
+                        isCreating={isCreating}
+                        setIsCreating={setIsCreating}
+                        setCreateType={setCreateType}
+                        setIsEditing={setIsEditing}
                     />
                 )}
                 Preview={(previewProps) => (
@@ -74,6 +78,10 @@ const ChannelListContainer = () => {
                     <GroupChannelList
                         {...listProps}
                         type="messaging"
+                        isCreating={isCreating}
+                        setIsCreating={setIsCreating}
+                        setCreateType={setCreateType}
+                        setIsEditing={setIsEditing}
                     />
                 )}
                 Preview={(previewProps) => (
