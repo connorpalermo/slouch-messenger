@@ -29,6 +29,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
           <CloseCreateChannel setIsCreating={setIsCreating} />
         </div>
         {createType === 'group' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName}/>}
+        <UserList />
     </div>
   )
 }
