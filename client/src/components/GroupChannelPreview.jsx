@@ -33,7 +33,7 @@ const GroupChannelPreview = ({channel, type}) => {
         ? 'channel-preview__wrapper__selected'
         : 'channel-preview__wrapper'
     }
-        onclick={() => {
+        onClick={() => {
             console.log(channel);
         }}
         >

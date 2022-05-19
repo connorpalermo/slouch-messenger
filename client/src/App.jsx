@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
@@ -39,6 +39,10 @@ if(authToken){
 
 // the basis of our entire application. Gets rendered in the ReactDOM in index.js
 const App = () => {
+  // pass props from here because both ChannelListContainer and ChannelContainer need to know
+  const [createType, setCreateType] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   // if we aren't logged in, then Auth component will be returned.
   if(!authToken) return <Auth />
@@ -47,10 +51,18 @@ const App = () => {
     <div className='app__wrapper'> 
         <Chat client={client} customStyles={customStyles}>
             <ChannelListContainer
-
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              isEditing={isEditing}
+              setCreateType={setCreateType}
+              setIsEditing={setIsEditing}
             />
             <ChannelContainer
-
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              createType={createType}
             />
         </Chat>
     </div>

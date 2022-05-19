@@ -10,9 +10,10 @@ require('dotenv').config();
 app.use(cors()); // allows CORS
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // allow sending of JSON payloads between client and server
+app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
 })
 
 app.use('/auth', authRoutes);
