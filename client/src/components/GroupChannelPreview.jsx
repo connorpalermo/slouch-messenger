@@ -8,7 +8,7 @@ const GroupChannelPreview = ({channel, type}) => {
 
     const ChannelPreview = () => (
         <p className='channel-preview__item'>
-            # {channel?.data?.name || channel?.data?.id}
+            {channel?.data?.name || channel?.data?.id}
         </p>
     )
 
@@ -37,7 +37,7 @@ const GroupChannelPreview = ({channel, type}) => {
             console.log(channel);
         }}
         >
-        {type === 'team' ? <ChannelPreview/> : <DMPreview/>}
+        {type === 'group' ? <ChannelPreview/> : <DMPreview/>}
     >
         
     </div>

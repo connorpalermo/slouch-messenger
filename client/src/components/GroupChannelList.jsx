@@ -36,7 +36,7 @@ const GroupChannelList = ({ children, error = false, loading, type, isCreating, 
                         setIsCreating={setIsCreating}
                         setCreateType={setCreateType}
                         setIsEditing={setIsEditing}   
-                        type={type === 'group' ? 'team' : 'messaging'}               
+                        type={type === 'group' ? 'group' : 'messaging'}               
                 />
             </div>
             {children}
