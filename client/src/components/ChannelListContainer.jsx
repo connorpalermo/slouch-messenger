@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
@@ -29,9 +29,18 @@ const CompanyHeader = () => (
     </div>
 );
 
+const customChannelGroupFilter = (channels) => {
+    return channels.filter((channel) => channel.type === 'team');
+}
+
+const customChannelDMFilter = (channels) => {
+    return channels.filter((channel) => channel.type === 'messaging');
+}
+
 // ChannelListContainer class will bring ChannelSearch, ChannelList, GroupChannelList etc together and display them in the ChannelList Wrapper
 // Sidebar with icons defined in a const above.
-const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+    const { client } = useChatContext();
 
     const logout = () => {
         cookies.remove('token');
@@ -44,6 +53,9 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
 
         window.location.reload(); //bring us back to auth page.
     }
+
+    const filters = {members: { $in: [client.userID] }}; // get all channels and DMs that our user is in.
+
   return (
         <>
         <SideBar logout={logout}/>
@@ -51,8 +63,8 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
             <CompanyHeader/>
             <ChannelSearch />
             <ChannelList 
-                filters={{}}
-                channelRenderFilterFunc={() => {}}
+                filters={filters}
+                channelRenderFilterFunc={customChannelGroupFilter}
                 List={(listProps) => (
                     <GroupChannelList
                         {...listProps}
@@ -72,8 +84,8 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                 }
             />
             <ChannelList 
-                filters={{}}
-                channelRenderFilterFunc={() => {}}
+                filters={filters}
+                channelRenderFilterFunc={customChannelDMFilter}
                 List={(listProps) => (
                     <GroupChannelList
                         {...listProps}
@@ -95,6 +107,34 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
         </div>
         </>
   )
+}
+
+const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) => {
+    const [toggleContainer,setToggleContainer] = useState(false);
+
+    return (
+        <>
+            <div className="channel-list__container">
+                <ChannelListContent
+                    setIsCreating={setIsCreating}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
+                />
+            </div>
+
+            <div className="channel-list__container-responsive" 
+                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#005fff"}}
+            >
+                <div className="channel-list__container-toggle" onClick={() => setToggleContainer((prevToggleContainer) => !prevToggleContainer)} />
+                <ChannelListContent
+                    setIsCreating={setIsCreating}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
+                    setToggleContainer={setToggleContainer}
+                />
+            </div>
+        </>
+    )
 }
 
 export default ChannelListContainer
