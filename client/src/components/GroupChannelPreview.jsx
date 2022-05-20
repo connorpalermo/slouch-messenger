@@ -37,7 +37,7 @@ const GroupChannelPreview = ({channel, type}) => {
             console.log(channel);
         }}
         >
-        {type === 'group' ? <ChannelPreview/> : <DMPreview/>}
+        {type === 'team' ? <ChannelPreview/> : <DMPreview/>}
     >
         
     </div>

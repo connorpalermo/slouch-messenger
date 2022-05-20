@@ -56,7 +56,7 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                 List={(listProps) => (
                     <GroupChannelList
                         {...listProps}
-                        type="group"
+                        type="team"
                         isCreating={isCreating}
                         setIsCreating={setIsCreating}
                         setCreateType={setCreateType}
@@ -66,7 +66,7 @@ const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsE
                 Preview={(previewProps) => (
                     <GroupChannelPreview
                         {...previewProps}
-                        type="group"
+                        type="team"
                     />
                 )
                 }

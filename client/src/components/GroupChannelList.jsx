@@ -7,7 +7,7 @@ import { AddChannel } from '../assets'
 
 const GroupChannelList = ({ children, error = false, loading, type, isCreating, setIsCreating, setCreateType, setIsEditing }) => {
       if(error) {
-          return type === 'group' ? (
+          return type === 'team' ? (
             <div className="team-channel-list">
                 <p className="team-channel-list__message">
                     Connection issues, please wait a few moments and try again.
@@ -19,7 +19,7 @@ const GroupChannelList = ({ children, error = false, loading, type, isCreating, 
             return(
               <div className="team-channel-list">
                   <p className="team-channel-list__message loading">
-                      {type === 'group' ? 'Channels' : 'Messages'} processing ...
+                      {type === 'team' ? 'Channels' : 'Messages'} processing ...
                   </p>
               </div>
             );
@@ -29,14 +29,14 @@ const GroupChannelList = ({ children, error = false, loading, type, isCreating, 
         <div className="team-channel-list">
             <div className="team-channel-list__header">
                 <p className="team-channel-list__header__title">
-                {type === 'group' ? 'Channels' : 'Direct Messages'} 
+                {type === 'team' ? 'Channels' : 'Direct Messages'} 
                 </p>
                 <AddChannel 
                         isCreating={isCreating}
                         setIsCreating={setIsCreating}
                         setCreateType={setCreateType}
                         setIsEditing={setIsEditing}   
-                        type={type === 'group' ? 'group' : 'messaging'}               
+                        type={type === 'team' ? 'team' : 'messaging'}               
                 />
             </div>
             {children}

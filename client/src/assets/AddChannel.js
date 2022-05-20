@@ -8,7 +8,6 @@ export const AddChannel = ({ setCreateType, setIsCreating, setIsEditing, setTogg
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
     onClick={() => {
-      console.log(type);
       setCreateType(type);
       setIsCreating((prevState) => !prevState);
       setIsEditing(false);
