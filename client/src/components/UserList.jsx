@@ -16,13 +16,15 @@ const ListContainer = ({ children }) => {
     )
 }
 
-const UserItem = () => {
+const UserItem = ({ user }) => {
     
     return (
         <div className="user-item__wrapper">
             <div className="user-item__name-wrapper">
-                <Avatar />
+                <Avatar image={user.image} name={user.fullName || user.id} size={32} />
+                <p className="user-item__name">{user.fullName || user.id}</p>
             </div>
+            <InviteIcon />
         </div>
     )
 }
@@ -41,7 +43,7 @@ const UserList = () => {
 
           try {
              const response = await client.queryUsers(
-                { id : { $ne: client.userId } }, // exclude querying ID of the current user. $ne means not equal to
+                { id : { $ne: client.userID } }, // exclude querying ID of the current user. $ne means not equal to
                 {id: 1}, 
                 {limit: 8} 
              );
@@ -56,12 +58,19 @@ const UserList = () => {
           }
           setLoading(false);
       }
-    }, [])
+      if(client) getUsers(); // if there is a client (we're connected) call the getUsers function
+    }, []);
     
 
     return (
         <ListContainer>
-            UserList
+            {loading ? <div className="user-list__message">
+                Loading users...
+                </div> : (
+                    users?.map((user, i) => (
+                        <UserItem index={i} key={user.id} user={user}/>
+                    ))
+                )}
         </ListContainer>
     )
 }
