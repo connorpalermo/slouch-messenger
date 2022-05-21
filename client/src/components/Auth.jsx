@@ -33,7 +33,7 @@ const handleSubmit = async (event) => {
     const URL = 'http://localhost:5001/auth'; // backend URL
 
     const { data: { fullName, token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login' }`,{
-        username, password, form.fullName, phoneNumber, avatarURL
+        username, password, fullname: form.fullName, phoneNumber, avatarURL
     }); // pass data to backend endpoint. We pass form ONLY on signup, and get fullName back so no empty string.
 
     cookies.set('token', token);
