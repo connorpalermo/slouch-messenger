@@ -28,13 +28,13 @@ const handleSubmit = async (event) => {
     event.preventDefault(); // avoid reloading the page
     console.log(form)
 
-    const { fullName, username, password, phoneNumber, avatarURL} = form; // gets values from keys in form
+    const { username, password, phoneNumber, avatarURL} = form; // gets values from keys in form. Removed fullName because it will be empty string on login
 
     const URL = 'http://localhost:5001/auth'; // backend URL
 
-    const { data: { token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login' }`,{
-        username, password, fullName, phoneNumber, avatarURL
-    }); // pass data to backend endpoint
+    const { data: { fullName, token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login' }`,{
+        username, password, form.fullName, phoneNumber, avatarURL
+    }); // pass data to backend endpoint. We pass form ONLY on signup, and get fullName back so no empty string.
 
     cookies.set('token', token);
     cookies.set('username', username);
