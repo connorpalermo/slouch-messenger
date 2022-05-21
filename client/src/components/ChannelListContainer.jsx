@@ -29,17 +29,19 @@ const CompanyHeader = () => (
     </div>
 );
 
+// filter function so that only channels appear under channels
 const customChannelGroupFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'team');
 }
 
+// filter function so that only DMs appear under DMs
 const customChannelDMFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'messaging');
 }
 
 // ChannelListContainer class will bring ChannelSearch, ChannelList, GroupChannelList etc together and display them in the ChannelList Wrapper
 // Sidebar with icons defined in a const above.
-const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing }) => {
+const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEditing, setToggleContainer }) => {
     const { client } = useChatContext();
 
     const logout = () => {
@@ -56,55 +58,61 @@ const ChannelListContent = ({ isCreating, setIsCreating, setCreateType, setIsEdi
 
     const filters = {members: { $in: [client.userID] }}; // get all channels and DMs that our user is in.
 
-  return (
+    return (
         <>
-        <SideBar logout={logout}/>
-        <div className="channel-list__list__wrapper">
-            <CompanyHeader/>
-            <ChannelSearch />
-            <ChannelList 
-                filters={filters}
-                channelRenderFilterFunc={customChannelGroupFilter}
-                List={(listProps) => (
-                    <GroupChannelList
-                        {...listProps}
-                        type="team"
-                        isCreating={isCreating}
-                        setIsCreating={setIsCreating}
-                        setCreateType={setCreateType}
-                        setIsEditing={setIsEditing}
-                    />
-                )}
-                Preview={(previewProps) => (
-                    <GroupChannelPreview
-                        {...previewProps}
-                        type="team"
-                    />
-                )
-                }
-            />
-            <ChannelList 
-                filters={filters}
-                channelRenderFilterFunc={customChannelDMFilter}
-                List={(listProps) => (
-                    <GroupChannelList
-                        {...listProps}
-                        type="messaging"
-                        isCreating={isCreating}
-                        setIsCreating={setIsCreating}
-                        setCreateType={setCreateType}
-                        setIsEditing={setIsEditing}
-                    />
-                )}
-                Preview={(previewProps) => (
-                    <GroupChannelPreview
-                        {...previewProps}
-                        type="messaging"
-                    />
-                )
-                }
-            />
-        </div>
+            <SideBar logout={logout} />
+            <div className="channel-list__list__wrapper">
+                <CompanyHeader />
+                <ChannelSearch setToggleContainer={setToggleContainer} />
+                <ChannelList 
+                    filters={filters}
+                    channelRenderFilterFn={customChannelGroupFilter}
+                    List={(listProps) => (
+                        <GroupChannelList 
+                            {...listProps}
+                            type="team"
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setCreateType={setCreateType} 
+                            setIsEditing={setIsEditing}
+                            setToggleContainer={setToggleContainer}
+                        />
+                    )}
+                    Preview={(previewProps) => (
+                        <GroupChannelPreview 
+                            {...previewProps}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
+                            setToggleContainer={setToggleContainer}
+                            type="team"
+                        />
+                    )}
+                />
+                <ChannelList 
+                    filters={filters}
+                    channelRenderFilterFn={customChannelDMFilter}
+                    List={(listProps) => (
+                        <GroupChannelList 
+                            {...listProps}
+                            type="messaging"
+                            isCreating={isCreating}
+                            setIsCreating={setIsCreating}
+                            setCreateType={setCreateType} 
+                            setIsEditing={setIsEditing}
+                            setToggleContainer={setToggleContainer}
+                        />
+                    )}
+                    Preview={(previewProps) => (
+                        <GroupChannelPreview 
+                            {...previewProps}
+                            setIsCreating={setIsCreating}
+                            setIsEditing={setIsEditing}
+                            setToggleContainer={setToggleContainer}
+                            type="messaging"
+                        />
+                    )}
+                />
+            </div>
         </>
   )
 }

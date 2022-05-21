@@ -5,7 +5,6 @@ import { ChannelInner, CreateChannel, EditChannel } from './';
 
 // will house the actual channels/DMs themselves once implemented
 const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, createType}) => {
-  const { channel } = useChatContext(); // get context of current channel
 
   if(isCreating){
     return (
