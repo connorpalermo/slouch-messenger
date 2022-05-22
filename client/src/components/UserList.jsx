@@ -57,7 +57,7 @@ const UserList = ({setSelectedUsers}) => {
 
           try {
              const response = await client.queryUsers(
-                { id : { $ne: client.userID } }, // exclude querying ID of the current user. $ne means not equal to
+                { id : { $ne: client.userID } }, // exclude querying ID of the current user.
                 {id: 1}, 
                 {limit: 8} 
              );
