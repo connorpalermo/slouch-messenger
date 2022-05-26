@@ -1,5 +1,5 @@
 // auth controllers
-const { connect } = require('getStream');
+const { connect } = require('getstream');
 const bcrypt = require('bcrypt');
 const StreamChat = require('stream-chat').StreamChat; // also need to create instance
 const crypto = require('crypto');

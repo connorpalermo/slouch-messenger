@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+        "./server/.env"
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: "cjpalermo/slouch-messenger-backend"
+    ports:
+      - "5001:5001"
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    image: "cjpalermo/slouch-messenger-frontend"
+    ports:
+      - "3000:3000"
+    links:
+      - "backend:be"
