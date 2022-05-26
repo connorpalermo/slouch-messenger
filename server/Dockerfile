@@ -6,7 +6,7 @@ LABEL maintainer="cjpalermo1996@gmail.com"
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json", "./"]
+COPY ["package.json", "./"]
 RUN ls
 RUN npm install --production
 COPY . .
