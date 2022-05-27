@@ -10,5 +10,5 @@ Twilio for SMS notifications
 
 HOSTING:  
 Client side is hosted as a static site on Google Cloud Storage  
-Service side is containerized and hosted on Google Cloud Run  
+Server side is containerized and hosted on Google Cloud Run  
 Integrated with Google Cloud Source Repositories for CI/CD  
