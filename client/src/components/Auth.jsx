@@ -30,7 +30,7 @@ const handleSubmit = async (event) => {
 
     const { username, password, phoneNumber, avatarURL} = form; // gets values from keys in form. Removed fullName because it will be empty string on login
 
-    const URL = 'http://localhost:5001/auth'; // backend URL
+    const URL = ' https://slouch-messenger-oxleyrln6a-uc.a.run.app/auth'; // backend URL
 
     const { data: { fullName, token, userId, hashedPassword } } = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login' }`,{
         username, password, fullname: form.fullName, phoneNumber, avatarURL
