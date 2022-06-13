@@ -18,7 +18,7 @@ const customStyles: CustomStyles = {
 
 const cookies = new Cookies();
 
-const slouchApiKey = '99aqgsgnd7ns'; 
+const slouchApiKey = 'h73mtwqya8wq'; 
 const authToken = cookies.get("token");
 
 // this will declare the instance of our Streamchat, which will allow this chat to work.
